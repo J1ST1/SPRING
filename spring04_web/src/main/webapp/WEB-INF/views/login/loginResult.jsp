@@ -1,0 +1,31 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>loginResult.jsp</title>
+</head>
+<body>
+
+	<h2>로그인 결과</h2>
+	
+	1) JSP<br>
+	<%=request.getAttribute("message")%>
+	아이디(세션) : <%=session.getAttribute("s_id") %><br>
+	비번(세션)  : <%=session.getAttribute("s_pw") %><br>
+	
+	<hr>
+	
+	2) EL<br>
+	${requestScope.message}
+	아이디(세션)  : ${sessionScope.s_id}<br>
+	비번(세션)   : ${sessionScope.s_pw}<br>
+	
+	${message}
+	아이디(세션)  : ${s_id}<br>
+	비번(세션)   : ${s_pw}<br>
+	
+
+</body>
+</html>
