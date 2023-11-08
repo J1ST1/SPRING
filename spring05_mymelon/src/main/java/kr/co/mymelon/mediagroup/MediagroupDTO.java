@@ -1,7 +1,7 @@
 package kr.co.mymelon.mediagroup;
 
 public class MediagroupDTO {
-
+	
 	private int mediagroupno;
 	private String title;
 	

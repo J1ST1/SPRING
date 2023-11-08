@@ -10,3 +10,11 @@ CREATE TABLE mediagroup (
 
 -- 시퀀스 생성
 create sequence mediagroup_seq;
+
+
+--행 삭제 sql문
+delete from mediagroup where mediagroupno = ?;
+
+--행 수정
+select * from mediagroup where mediagroupno=?
+update mediagroup set title = ? where mediagroupno=?
