@@ -18,3 +18,9 @@ CREATE TABLE media (
 -- 시퀀스 생성
 
 create sequence media_seq;
+
+-- 행 등록
+SELECT mediano, title, rdate, poster, filename, filesize, mediagroupno
+FROM media
+WHERE mview='Y' AND mediagroupno = 46
+ORDER BY mediano DESC
