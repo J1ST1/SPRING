@@ -4,6 +4,11 @@
 <html>
 <head>
 <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <title>createForm.jsp</title>
 <style>
 	*{ font-family: gulim; font-size: 24px; }
@@ -16,7 +21,7 @@
 	
 	<form name="frm" method="post" action="create.do" enctype="multipart/form-data">
 		<input type="hidden" name="mediagroupno" value="${requestScope.mediagroupno}"><!-- 부모글번호 -->
-		<table>
+		<table class="table">
         <tr>
           <th>제목</th>
           <td><input type='text' name='title' size='50'></td>

@@ -104,5 +104,42 @@ public class MediaDAO {
         }//end
         return dto;
     }//read() end
+    
+    
+    public int update(MediaDTO dto) {
+		int cnt = 0;
+		try {
+			sql = new StringBuilder();
+			
+			sql.append(" UPDATE media ");
+			sql.append(" SET title = ?, poster=?, filename=?, filesize=? ");
+			sql.append(" WHERE mediano = ? ");
+			
+			//SQL문 (insert, update, delete)실행
+			cnt = jt.update(sql.toString(), dto.getTitle(), dto.getPoster(), dto.getFilename(), dto.getFilesize(), dto.getMediano());
+			
+		} catch (Exception e) {
+			System.out.println("음원수정실패 : " + e);
+		}//end
+		return cnt;
+	}//update() end
+    
+    
+    public int delete(int mediano) {
+		int cnt = 0;
+		try {
+			sql = new StringBuilder();
+			
+			sql.append(" DELETE FROM media ");
+			sql.append(" WHERE mediano = ? ");
+			
+			//SQL문 (insert, update, delete)실행
+			cnt = jt.update(sql.toString(), mediano);
+			
+		} catch (Exception e) {
+			System.out.println("음원삭제실패 : " + e);
+		}//end
+		return cnt;
+	}//delete() end
 	
 }//class end
