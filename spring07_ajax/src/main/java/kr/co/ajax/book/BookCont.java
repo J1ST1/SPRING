@@ -47,6 +47,7 @@ public class BookCont {
 	}//bookTest() end
 	
 	@PostMapping("/searchproc.do")
+	@ResponseBody
 	public String searchProc(HttpServletRequest req) {
 		String keyword = req.getParameter("keyword").trim();
 		String message = ""; //응답메시지
@@ -55,7 +56,21 @@ public class BookCont {
 			//예) 검색어 : 자바
 			//	 "자바" "자바 프로그래밍" "자바 안드로이드" 반환
 			ArrayList<String> list = search(keyword);
-			System.out.println(list.toString());
+			//System.out.println(list.toString());
+			
+			//응답 메시지 -> 갯수|찾은문자열, 찾은문자열, 찾은문자열, ~~~
+			//			 예)3|자바, 자바 프로그래밍, 자바 안드로이드
+			int size = list.size(); //3
+			if(size>0) {
+				message += size + "|";
+				for(int i=0; i<size; i++) {
+					String title = list.get(i);
+					message += title;
+					if(i<size-1) { //
+						message += ",";
+					}// if end
+				}//for end
+			}//if end
 		}//if end
 		
 		return message;
