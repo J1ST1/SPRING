@@ -40,13 +40,59 @@
 
   <div class="row">
     <div class="col-sm-12">
-     	<p><h3>상품목록</h3></p>
+     	<br><p><h3>상품목록</h3></p><br>
      	<p>
      		<button type="button" onclick="location.href='write'" class="btn btn-success">상품등록</button>
      		<button type="button" onclick="location.href='list'" class="btn btn-primary">상품전체목록</button>
      	</p>
-     	
     </div><!-- col end -->
+  </div><!-- row end -->
+  
+    <div class="row">
+    <div class="col-sm-12">
+     	<!-- 검색 -->
+     	<form method="get" action="search">
+     		상품명 : <input type="text" name="product_name" value="${product_name}">
+     			   <input type="submit" value="검색" class="btn">
+     	</form>
+     	<hr>
+    </div><!-- col end -->
+  </div><!-- row end -->
+  
+  <div class="row">
+     <!-- varStatus = "상태용 변수 -->
+     	<c:forEach items="${list}" var="row" varStatus="vs"> 
+     		
+     		<div class="col-sm-4 col-md-4">
+     		<c:choose>
+     			<c:when test="${row.FILENAME != '-'}">
+     				<a href="detail/${row.PRODUCT_CODE}">
+     				<img src="/storage/${row.FILENAME}" class="img-responsive margin" style="width:100%">
+     				</a>
+     			</c:when>
+     			<c:otherwise>
+     				등록된 사진 없음!!<br>
+     			</c:otherwise>
+     		</c:choose>
+	     	<br>
+	     	상품명 : 
+	     		<!-- http://localhost:9095/product/detail?product_code=22 -->
+	     		<%-- <a href="detail?product_code=${row.PRODUCT_CODE}">${row.PRODUCT_NAME}</a> --%>
+	     		
+	     		<!-- RESTful Web Service URL 형식으로 서버에 요청 -->
+	     		<!-- http://localhost:9095/product/detail/21 -->
+	     		<a href="detail/${row.PRODUCT_CODE}">${row.PRODUCT_NAME}</a>
+	     	<br>
+	     	상품가격 : <fmt:formatNumber value="${row.PRICE}" pattern="#,###"/> 
+	     	</div>
+     		<!-- 한줄에 3칸씩 -->
+     		<c:if test="${vs.count mod 3==0}">
+	     		</div><!-- row end -->
+	     		<div style="height: 50px;"></div>
+	     		<div class="row">
+     		</c:if>
+     	
+     	</c:forEach>
   </div><!-- row end -->
   
   <!-- 본문 끝 -->
