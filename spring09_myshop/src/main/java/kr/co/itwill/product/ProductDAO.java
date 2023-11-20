@@ -44,8 +44,14 @@ public class ProductDAO {
 		sqlSession.update("product.update", map);
 	}//update() end
 		
-	public void delete(Map<String, Object> map) {
-		sqlSession.delete("product.delete", map);
+	
+	public String filename(int product_code) {
+		return sqlSession.selectOne("product.filename", product_code);
+	}//filename() end
+	
+	
+	public void delete(int product_code) {
+		sqlSession.delete("product.delete", product_code);
 	}//delete() end
 		
 }//class end

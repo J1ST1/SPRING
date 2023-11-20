@@ -1,20 +1,20 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
-
+<%@ taglib prefix="c"   uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn"  uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+    
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  <title>write.jsp</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-  <script src="/js/jquery-3.7.1.min.js"></script>
-  <link href="/css/main.css" rel="stylesheet" type="text/css">
+    <title>write.jsp</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+	<script src="/js/jquery-3.7.1.min.js"></script>
+	<link href="/css/main.css" rel="stylesheet" type="text/css">
 </head>
 <body>
 
@@ -40,7 +40,9 @@
 
   <div class="row">
     <div class="col-sm-12">
-     	<br><p><h3>상품등록</h3></p><br>
+     	<br>
+    	<p><h3>상품등록</h3></p>
+     	<br>
      	<p>
      		<button type="button" onclick="location.href='list'" class="btn btn-primary">상품전체목록</button>
      	</p>
@@ -49,7 +51,7 @@
   
   <div class="row">
   	<div class="col-sm-12">
-  		<form name="productfrm" id="productfrm" method="post" enctype="multipart/form-data">
+  		<form name="productfrm" id="productfrm" method="post" action="insert" enctype="multipart/form-data">
   			<table class="table table-hover">
 			   <tbody style="text-align: left;">
 			   <tr>
@@ -81,7 +83,7 @@
     </div><!-- col end -->
   </div><!-- row end -->
   
-  <!-- 본문 끝 -->
+<!-- 본문 끝 -->
 </div><!-- container end -->
 
 <div class="mt-5 p-4 bg-dark text-white text-center">
@@ -90,3 +92,4 @@
 
 </body>
 </html>
+    

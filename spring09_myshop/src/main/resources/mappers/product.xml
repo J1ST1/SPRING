@@ -8,10 +8,10 @@
  
  <mapper namespace="product">
  
- 	<insert id="insert" parameterType="java.util.Map">
- 		INSERT INTO product(product_code, product_name, description, price, filename, filesize)
- 		VALUES(product_seq.nextval, #{product_name}, #{description}, #{price}, #{filename}, #{filesize})
- 	</insert>
+	<insert id="insert" parameterType="java.util.Map">
+		INSERT INTO product(product_code, product_name, description, price, filename, filesize)
+		VALUES(product_seq.nextval, #{product_name}, #{description}, #{price}, #{filename}, #{filesize})
+	</insert>
  
  	<select id="list" resultType="java.util.Map">
  		SELECT product_code, product_name, description, price, filename, filesize
@@ -34,17 +34,24 @@
  	
  	<update id="update" parameterType="java.util.Map">
 	 	UPDATE product
-	 	SET product_name=#{product_name}, description=#{description}, price=#{price}
-	 	   ,filename=#{filename}, filesize=#{filesize}
+	 	SET product_name=#{product_name}
+	 	   ,description=#{description}
+	 	   ,price=#{price}
+	 	   ,filename=#{filename}
+	 	   ,filesize=#{filesize}
 	 	WHERE product_code=#{product_code}
  	</update>
  	
- 	<delete id="delete" parameterType="java.util.Map">
+ 	<!-- 삭제할 때 파일도 같이 삭제하기 위해 정보 가져오기 -->
+ 	<select id="filename" resultType="String" parameterType="int">
+	 	SELECT filename
+	 	FROM product
+	 	WHERE product_code = #{product_code}
+ 	</select>
+ 	
+ 	<delete id="delete" parameterType="int">
  	 	DELETE FROM product
  		WHERE product_code = #{product_code}
  	</delete>
-
-	
- 	
  	
  </mapper>

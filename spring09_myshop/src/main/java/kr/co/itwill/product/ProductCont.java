@@ -46,42 +46,43 @@ public class ProductCont {
 	}//write() end
 	
 	
-	@PostMapping("/insert")
-	public String insert(@RequestParam Map<String, Object> map,
-						 @RequestParam MultipartFile img,
-						 HttpServletRequest req) {
-		//매개변수가 Map이면 name이 key로 저장된다
-		//예)<input type="text" name="product_name">
-		//System.out.println(map);
-		//System.out.println(map.get("product_name"));
-		//System.out.println(map.get("price"));
-		//System.out.println(map.get("description"));
-		
-		//주의사항 : 파일업로드 할 때 리네임 되지 않음
-		//업로드된 파일은 /storage 폴더에 저장
-		
-		String filename = "-";
-		long filesize = 0;
-		if(img != null && !img.isEmpty()) { //파일이 존재한다면
-			filename = img.getOriginalFilename();
-			filesize = img.getSize();
-			try {
-				ServletContext application = req.getSession().getServletContext();
-				String path = application.getRealPath("/storage"); //실제 물리적인 경로
-				img.transferTo(new File(path + "\\" + filename)); //파일 저장
-			} catch (Exception e) {
+    @PostMapping("/insert")
+    public String insert(@RequestParam Map<String, Object> map,
+			 			 @RequestParam MultipartFile img,
+			 			 HttpServletRequest req) {
+    	//매개변수가 Map이면 name이 key로 저장된다
+    	//예)<input type="text" name="product_name">
+    	//System.out.println(map);
+    	//System.out.println(map.get("product_name"));
+    	//System.out.println(map.get("price"));
+    	//System.out.println(map.get("description"));
+    	
+    	//주의사항 : 파일업로드할 때 리네임 되지 않음
+    	//업로드된 파일은 /storage 폴더에 저장
+    	
+    	String filename = "-";
+    	long filesize = 0;
+    	if(img != null && !img.isEmpty()) {//파일이 존재한다면
+    		filename=img.getOriginalFilename();
+    		filesize=img.getSize();
+    		try {
+    			ServletContext application = req.getSession().getServletContext();
+    			String path=application.getRealPath("/storage");  //실제 물리적인 경로
+    			img.transferTo(new File(path + "\\" + filename)); //파일저장
+    		}catch (Exception e) {
 				System.out.println(e);
 			}//try end
-		}//if end
-		
-		map.put("filename", filename);
-		map.put("filesize", filesize);
-		
-		productDao.insert(map);
-		
-		return "redirect:/product/list";
-		
-	}//insert() end
+    	}//if end    	
+    	
+    	
+    	map.put("filename", filename);
+    	map.put("filesize", filesize);
+    	
+    	productDao.insert(map);
+    	
+    	return "redirect:/product/list";
+    	
+    }//insert() end
 	
 	
 	@GetMapping("/search")
@@ -129,20 +130,11 @@ public class ProductCont {
 		return mav;
 	}//detail() end
 	
-	
+
 	@PostMapping("/update")
 	public String update(@RequestParam Map<String, Object> map,
 						 @RequestParam MultipartFile img,
 						 HttpServletRequest req) {
-		//매개변수가 Map이면 name이 key로 저장된다
-		//예)<input type="text" name="product_name">
-		//System.out.println(map);
-		//System.out.println(map.get("product_name"));
-		//System.out.println(map.get("price"));
-		//System.out.println(map.get("description"));
-		
-		//주의사항 : 파일업로드 할 때 리네임 되지 않음
-		//업로드된 파일은 /storage 폴더에 저장
 		
 		String filename = "-";
 		long filesize = 0;
@@ -156,6 +148,11 @@ public class ProductCont {
 			} catch (Exception e) {
 				System.out.println(e);
 			}//try end
+		}else {//첨부된 파일이 없다면
+			int product_code = Integer.parseInt(map.get("product_code").toString());
+			Map<String, Object> oldproduct = productDao.detail(product_code);
+			filename = oldproduct.get("FILENAME").toString();
+			filesize = Long.parseLong(oldproduct.get("FILESIZE").toString());
 		}//if end
 		
 		map.put("filename", filename);
@@ -167,13 +164,28 @@ public class ProductCont {
 		
 	}//update() end
 	
+	
 	@PostMapping("/delete")
-	public String delete(@RequestParam Map<String, Object> map,
-			 		   @RequestParam MultipartFile img,
-			 		   HttpServletRequest req) {
-		productDao.delete(map);
+	public String delete(HttpServletRequest req) {
+		int product_code = Integer.parseInt(req.getParameter("product_code"));
+		
+		//삭제하고자 하는 파일명 가져오기
+		String filename = productDao.filename(product_code);
+		
+		//첨부된 파일 삭제
+		if(filename != null && !filename.equals("-")) {
+			ServletContext application = req.getSession().getServletContext();
+			String path = application.getRealPath("/storage"); //실제 물리적인 경로
+			File file = new File(path + "\\" + filename); //파일 저장
+			if(file.exists()) {
+				file.delete();
+			}//if end
+		}//if end
+		
+		productDao.delete(product_code);//테이블 행 삭제
 		
 		return "redirect:/product/list";
+		
 	}//delete() end
 	
 }//class end

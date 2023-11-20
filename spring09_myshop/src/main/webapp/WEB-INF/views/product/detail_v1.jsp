@@ -104,78 +104,14 @@
   		</form>
     </div><!-- col end -->
   </div><!-- row end -->
-  <br>
+  
   <!-- 댓글 시작 -->
   <div class="row">
-  	<div class="col-sm-12"><!-- 댓글 등록 -->
-  			<form name="commentInsertForm" id="commentInsertForm">
-  				<!-- 부모글 번호 -->
-  				<input type="hidden" name="product_code" id="product_code" value="${product.PRODUCT_CODE}">
-					<table class="table table-borderless">
-					<tr>
-						<td>
-							<input type="text" name="content" id="content" placeholder="댓글 내용 입력해 주세요" class="form-control">
-						</td>
-						<td>
-							<button type="button"  name="commentInsertBtn" id="commentInsertBtn" class="btn btn-secondary">댓글등록</button>
-						</td>
-					</table>
-  			</form>
-    </div><!-- col end -->
-  </div><!-- row end -->
-  <br><hr><br>
-
-    <div class="row">
-  	<div class="col-sm-12"><!-- 댓글목록 -->
-  		<div class="commentList">
-  		<c:forEach items="${list}" var="dto"> 
-			${dto.cno}
-			${dto.content}
-			${dto.wname}
-			${dto.regdate}
-	</c:forEach>
-  		</div>
+  	<div class="col-sm-12">
+  	
     </div><!-- col end -->
   </div><!-- row end -->
   <!-- 댓글 끝 -->
-  
-  <!-- 댓글 관련 자바스크립트 -->
-  <script>
-  	let product_code = '${product.PRODUCT_CODE}'; //부모글 번호
-  	
-  	//댓글등록 버튼을 클릭했을 때
-  	$("#commentInsertBtn").click(function() {
-		//alert($);
-		let content = $("#content").val();
-		content = content.trim();
-		if(content.length == 0){
-			alert("댓글 내용 입력해 주세요");
-		   $("#content").focus();
-		}else{
-			//serialize함수 -> <form id="commentInsertForm"></form>의 컨트롤 요소를 전부 가져옴
-			let insertData = $("#commentInsertForm").serialize();
-			//alert(insertData); //product_code=85&content=apple
-			commentInsert(insertData); //댓글등록 함수 호출
-		}//if end
-	});//click end
-	
-	function commentInsert(insertData) {//댓글등록 함수
-		//alert("댓글등록함수호출:" + insertData); //댓글등록함수호출:product_code=85&content=apple
-		$.ajax({
-			url: '/comment/insert'//요청명령어
-		   ,type: 'post'
-		   ,data: insertData      //전달값
-		   ,error: function(error) {
-			   alert(error);
-		   }//error() end
-		   ,success: function(data) {
-			   alert(data);
-		   }//success() end
-		});//ajax() end
-	}//commentInsert() end
-	
-	
-  </script>
   
   <!-- 본문 끝 -->
 </div><!-- container end -->
