@@ -13,3 +13,9 @@ create table pcomment (
 
 --댓글 시퀀스
 create sequence pcomment_seq;
+
+--댓글 목록
+SELECT cno, product_code, content, wname, regdate
+FROM pcomment
+WHERE prouct_code=#{product_code}
+ORDER BY cno

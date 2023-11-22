@@ -27,16 +27,7 @@
 		document.productfrm.action="/product/delete";
 		document.productfrm.submit();
 		}//if end
-	}//product_delete() end
-	
-  	function product_cart() {
-		if($("#qty").val()=="0"){
-			alert("상품수량 선택해 주세요");
-		}else {
-			document.productfrm.action="/cart/insert";
-			document.productfrm.submit();
-		}//if end
-	}//product_cart() end
+	}//product_update() end
   </script>
   
 </head>
@@ -100,19 +91,6 @@
 						<br> <br>
 						<input type="file" name="img" class="form-control"> 
 					</td>
-			    </tr>
-			    <tr>
-			    	<td>상품수량</td>
-			    	<td>
-			    		<select name="qty" id="qty" class="form-control">
-			    			<option value="0">◎선택◎</option>
-			    			<option value="1">1</option>
-			    			<option value="2">2</option>
-			    			<option value="3">3</option>
-			    			<option value="4">4</option>
-			    			<option value="5">5</option>
-			    		</select>
-			    	</td>
 			    </tr>
 			    <tr>
 					<td colspan="2" align="center">

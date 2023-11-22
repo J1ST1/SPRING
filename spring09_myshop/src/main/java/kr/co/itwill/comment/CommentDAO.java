@@ -23,11 +23,25 @@ public class CommentDAO {
 
 	}//commentInsert() end
 	
-	public List<CommentDTO> list(int product_code)throws Exception{
+	public List<CommentDTO> commentList(int product_code){
 		
 		return sqlSession.selectList("comment.list", product_code);
 	
 	}//list() end
+	
+	public int commentUpdate(CommentDTO comment){
+		
+		return sqlSession.update("comment.update", comment);
+	
+	}//commentUpdate() end
+	
+	public int commentDelete(int cno) throws Exception{
+		
+		return sqlSession.delete("comment.delete", cno);
+	
+	}//delete() end
+	
+	
 	
 	
 }//class end
