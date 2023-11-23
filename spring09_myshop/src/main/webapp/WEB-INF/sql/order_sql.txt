@@ -1,0 +1,36 @@
+--order_sql.txt
+
+--주문서 테이블
+create table orderlist (
+    orderno      char(15)      primary key      --주문서번호
+   ,id           varchar(15)   not null         --아이디
+   ,totalamount  number                         --총결제금액
+   ,payment      varchar(10)   not null         --결제구분 (cash,card등)
+   ,deliverynm   varchar(100)  not null         --받는사람
+   ,deliveryaddr varchar(2000) not null         --받는주소
+   ,deliverymsg  varchar(2000)                  --배송메세지
+   ,ordercheck   char(1)       not null         --결과상태(Y:배송완료, C:주문취소, I:진행
+   ,orderdate    date          default sysdate  --주문일
+);
+
+--주문서 번호 생성
+--년월일시분초 날짜데이터를 활용해서 구성한다
+--예)202311231436151 <---- 2023년 11월 23일 14시 36분 15초에 최초 주문서 번호
+	 202311231436152 <---- max(주문서번호) + 1
+	 202311231436153
+
+select nvl(orderno)
+from orderlist
+where orderno like '20231123144315%'
+
+
+select nvl(max(orderno), 1)
+from orderlist
+where orderno like '20231123144315%'
+
+
+-- 총결제금액 : totalamount
+select sum(price*qty)
+from cart
+where id='itwill';
+

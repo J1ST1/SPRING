@@ -15,20 +15,20 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
   <script src="/js/jquery-3.7.1.min.js"></script>
   <link href="/css/main.css" rel="stylesheet" type="text/css">
+  
   <script>
-  function cartDelete(cartno) {
-	  if(confirm("해당 상품을 삭제할까요?")){
-		  	//또다른 방법 <form action='/cart/delete'></form>
-			location.href='/cart/delete?cartno=' + cartno;
-			}//if end
-}//cartDelete() end
-
-function order() {
-	if(confirm("주문할까요?")){
-		location.href='/order/orderform';
+  function orderCheck() {
+	//유효성검사(받는사람, 받는주소, 배송메시지)
+	
+	if(confirm("결제할까요?")) {
+		return true;
+	}else{
+		return false;
 	}//if end
-}//order() end
+	
+}//orderCheck() end
   </script>
+  
 </head>
 <body>
 
@@ -54,43 +54,46 @@ function order() {
 
   <div class="row">
     <div class="col-sm-12">
-     	<p><h3>장바구니 목록</h3></p>
+     	<p><h3>배송지 작성</h3></p>
     </div><!-- col end -->
   </div><!-- row end -->
   
-  <div class="row">
-  	<div class="col-sm-12">
-  		<table class="table table-hover">
-  		<thead class="table-success">
-  			<th>아이디</th>
-  			<th>번호</th>
-  			<th>상품코드</th>
-  			<th>단가</th>
-  			<th>상품수량</th>
-  			<th>가격</th>
-  			<th>삭제</th>
-  		</thead>
-  		<tbody>
-  			<c:forEach items="${list}" var="row">
-  				<tr>
-  					<td>${row.id}</td>
-  					<td>${row.cartno}</td>
-  					<td>${row.product_code}</td>
-  					<td>${row.price}</td>
-  					<td>${row.qty}</td>
-  					<td>${row.price*row.qty}</td>
-  					<td>
-  						<input type="button" value="삭제" onclick="cartDelete(${row.cartno})">
-  					</td>
-  				</tr>
-  			</c:forEach>
-  		</tbody>
-  		</table>
-  		
-  		<br>
-  		<input type="button" value="계속쇼핑하기" onclick="location.href='/product/list'">
-  		<input type="button" value="주문하기" onclick="order()">
-  	</div><!-- col end -->
+    <div class="row">
+    <div class="col-sm-12">
+		<form method="post" action="insert" onsubmit="return orderCheck()">
+			<table class="table table-hover">
+			    <tbody style="text-align: left;">
+		    	<tr>
+		    		<th>받는사람</th>
+		    		<td><input type="text" name="deliverynm" class="form-control"></td>
+		    	</tr>
+		    	<tr>
+		    		<th>받는주소</th>
+		    		<td><input type="text" name="deliveryaddr" class="form-control"></td>
+		    	</tr>
+				<tr>
+		    		<th>배송메세지</th>
+		    		<td><input type="text" name="deliverymsg" class="form-control"></td>
+		    	</tr>
+		    	<tr>
+		    		<th>결제구분</th>
+		    		<td>
+		    			<select name="payment" class="form-control">
+		    				<option value="cash">현금결제</option>
+		    				<option value="card">카드</option>
+		    			</select>
+		    		</td>
+		    	</tr>
+				<tr>
+		    		<td colspan="2" align="center">
+		    			<input type="submit" value="결제하기" class="btn btn-warning">
+		    		</td>
+		    	</tr>
+		    	</tbody>
+	    	</table>
+		
+		</form>  
+    </div><!-- col end -->
   </div><!-- row end -->
   
   <!-- 본문 끝 -->
