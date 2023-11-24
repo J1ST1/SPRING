@@ -15,20 +15,6 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
   <script src="/js/jquery-3.7.1.min.js"></script>
   <link href="/css/main.css" rel="stylesheet" type="text/css">
-  
-  <script>
-  function orderCheck() {
-	//유효성검사(받는사람, 받는주소, 배송메시지)
-	
-	if(confirm("결제할까요?")) {
-		return true;
-	}else{
-		return false;
-	}//if end
-	
-}//orderCheck() end
-  </script>
-  
 </head>
 <body>
 
@@ -54,47 +40,18 @@
 
   <div class="row">
     <div class="col-sm-12">
-     	<br><p><h3>배송지 작성</h3></p><br>
+     	<p><h3>My Shop 주문 내역서</h3></p>
     </div><!-- col end -->
   </div><!-- row end -->
   
     <div class="row">
     <div class="col-sm-12">
-		<form method="post" action="insert" onsubmit="return orderCheck()">
-			<table class="table table-hover">
-			    <tbody style="text-align: left;">
-		    	<tr>
-		    		<th>받는사람</th>
-		    		<td><input type="text" name="deliverynm" class="form-control"></td>
-		    	</tr>
-		    	<tr>
-		    		<th>받는주소</th>
-		    		<td><input type="text" name="deliveryaddr" class="form-control"></td>
-		    	</tr>
-				<tr>
-		    		<th>배송메세지</th>
-		    		<td><input type="text" name="deliverymsg" class="form-control"></td>
-		    	</tr>
-		    	<tr>
-		    		<th>결제구분</th>
-		    		<td>
-		    			<select name="payment" class="form-control">
-		    				<option value="cash">현금결제</option>
-		    				<option value="card">카드</option>
-		    			</select>
-		    		</td>
-		    	</tr>
-				<tr>
-		    		<td colspan="2" align="center">
-		    			<input type="submit" value="결제하기" class="btn btn-warning">
-		    		</td>
-		    	</tr>
-		    	</tbody>
-	    	</table>
-		
-		</form>  
+     	<p>${msg1}</p>
+     	<p>${msg2}</p>
+     	<p>${msg3}</p>
     </div><!-- col end -->
   </div><!-- row end -->
+
   
   <!-- 본문 끝 -->
 </div><!-- container end -->

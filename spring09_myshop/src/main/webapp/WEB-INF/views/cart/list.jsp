@@ -54,7 +54,7 @@ function order() {
 
   <div class="row">
     <div class="col-sm-12">
-     	<p><h3>장바구니 목록</h3></p>
+     	<br><p><h3>장바구니 목록</h3></p><br>
     </div><!-- col end -->
   </div><!-- row end -->
   

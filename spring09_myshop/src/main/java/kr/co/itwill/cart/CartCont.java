@@ -27,7 +27,7 @@ public class CartCont {
 	public String cartInsert(@ModelAttribute CartDTO cartDto, HttpSession session) {
 		//로그인 기능을 구현했다면 session.getAttribute() 활용
 		//cartDto.setId(session.getAttribute("s_id"));
-		cartDto.setId("j1st"); //여기서는 임시로 "itwill"
+		cartDto.setId("itwill"); //여기서는 임시로 "itwill"
 		//아이디 바꾸는 곳 ↑
 		cartDao.cartInsert(cartDto);
 		
